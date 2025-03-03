@@ -21,7 +21,6 @@ public class ProductRequestDto {
 
     @Schema(description = "상품 가격", example = "1000")
     @NotNull
-    @NotBlank
     private Long price;
 
     @Schema(description = "배송비", example = "500")
