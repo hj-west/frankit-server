@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 public enum BaseResponseStatus {
     FRAN200000(HttpStatus.OK),
     FRAN400000(HttpStatus.BAD_REQUEST),
+    FRAN400001(HttpStatus.BAD_REQUEST, "Product not found"),
     FRAN401000(HttpStatus.UNAUTHORIZED),
     FRAN401001(HttpStatus.UNAUTHORIZED, "Invalid email or password"),
     FRAN402000(HttpStatus.PAYMENT_REQUIRED),
