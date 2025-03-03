@@ -34,7 +34,7 @@ public class Product extends BaseEntity {
     /**
      * PRICE : 상품 가격
      */
-    @Column(name = "DESCRIPTION")
+    @Column(name = "PRICE", nullable = false)
     private Long price;
 
     /**
