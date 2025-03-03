@@ -12,8 +12,11 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -52,12 +55,29 @@ public class AdminProductControllerV1 {
         return ResponseEntity.ok(new BaseResponse<>());
     }
 
+    @Operation(summary = "상품 수정 API", description = "상품의 번호와 정보를 입력하여 상품을 수정합니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "상품 수정 성공")
+    })
+    @PutMapping("/{productId}")
+    public ResponseEntity<BaseResponse<Void>> updateProduct(
+            @Parameter(description = "상품 번호", example = "1")
+            @PathVariable String productId,
+            @RequestBody @Valid ProductRequestDto requestDto) {
+        try {
+            productService.updateProduct(Long.valueOf(productId), requestDto.getName(), requestDto.getDescription(), requestDto.getPrice(), requestDto.getShippingCost());
+        } catch (BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BaseResponse<>(BaseResponseStatus.FRAN400001));
+        }
+        return ResponseEntity.ok(new BaseResponse<>());
+    }
+
     @Operation(summary = "상품 삭제 API", description = "등록된 상품을 삭제합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "상품 삭제 성공")
     })
     @DeleteMapping("/{productId}")
-    public ResponseEntity<BaseResponse<BaseResponseStatus>> deleteProduct(
+    public ResponseEntity<BaseResponse<Void>> deleteProduct(
             @Parameter(description = "상품 번호", example = "1")
             @PathVariable String productId
     ) {
