@@ -4,10 +4,13 @@ import com.frankit.entity.Product;
 import com.frankit.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -30,6 +33,20 @@ public class ProductServiceImpl implements ProductService {
                 .price(price)
                 .shippingCost(shippingCost)
                 .build());
+    }
+
+    @Override
+    @Transactional
+    public void updateProduct(Long productId, String name, String description, Long price, Long shippingCost) throws BadRequestException {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new BadRequestException("Product not found :" + productId));
+
+        // 파라미터가 아예 넘어오지 않는 경우도 고려함
+        product.setName(Optional.ofNullable(name).orElse(product.getName()));
+        product.setDescription(Optional.ofNullable(description).orElse(product.getDescription()));
+        product.setPrice(Optional.ofNullable(price).orElse(product.getPrice()));
+        product.setShippingCost(Optional.ofNullable(shippingCost).orElse(product.getShippingCost()));
+
+        productRepository.save(product);
     }
 
     @Override
