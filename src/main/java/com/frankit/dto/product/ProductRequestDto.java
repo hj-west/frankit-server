@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class RegisterProductRequestDto {
+public class ProductRequestDto {
     @Schema(description = "상품명", example = "모나미 볼펜")
     @NotNull
     @NotBlank

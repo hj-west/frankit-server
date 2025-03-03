@@ -3,7 +3,7 @@ package com.frankit.controller.v1.product;
 import com.frankit.controller.v1.BaseControllerV1;
 import com.frankit.dto.BaseResponse;
 import com.frankit.dto.BaseResponseStatus;
-import com.frankit.dto.product.RegisterProductRequestDto;
+import com.frankit.dto.product.ProductRequestDto;
 import com.frankit.entity.Product;
 import com.frankit.service.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +45,7 @@ public class AdminProductControllerV1 {
             @ApiResponse(responseCode = "200", description = "상품 등록 성공")
     })
     @PostMapping
-    public ResponseEntity<BaseResponse<BaseResponseStatus>> registerProduct(@RequestBody @Valid RegisterProductRequestDto requestDto) {
+    public ResponseEntity<BaseResponse<BaseResponseStatus>> registerProduct(@RequestBody @Valid ProductRequestDto requestDto) {
         productService.saveProduct(requestDto.getName(), requestDto.getDescription(), requestDto.getPrice(), requestDto.getShippingCost());
 
         return ResponseEntity.ok(new BaseResponse<>());
