@@ -1,7 +1,9 @@
 package com.frankit.dto;
 
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 public class BaseResponse<T> {
 
     protected BaseResponseStatus status;
