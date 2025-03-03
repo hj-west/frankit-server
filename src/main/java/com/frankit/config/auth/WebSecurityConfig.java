@@ -20,6 +20,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // 스웨거 경로 모두 허용
+                        .requestMatchers("/api/v1/auth").permitAll() // 로그인 경로 허용
                         .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
                 )
        ;
