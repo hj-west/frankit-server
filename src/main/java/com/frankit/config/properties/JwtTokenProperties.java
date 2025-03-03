@@ -13,5 +13,5 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class JwtTokenProperties {
     private String secret;
-    private String tokenValidTime;
+    private Long tokenValidTime;
 }
