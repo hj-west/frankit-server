@@ -1,5 +1,6 @@
 package com.frankit.entity;
 
+import com.frankit.entity.enums.OptionType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,13 +18,14 @@ public class ProductOption extends BaseEntity {
     @Id
     @Column(name = "PRODUCT_OPTION_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private Long productOptionId;
 
     /**
      * TYPE : 옵션 타입
      */
     @Column(name = "TYPE", nullable = false, length = 30)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private OptionType type;
 
     /**
      * VALUE : 옵션 값 목록
