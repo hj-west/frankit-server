@@ -1,5 +1,6 @@
 package com.frankit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,5 +49,6 @@ public class Product extends BaseEntity {
 
     // cascade : 부모의 변경이 자식에게도 영향을 미침, orphanRemoval : 부모가 삭제되면 자식도 삭제
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<ProductOption> options;
 }
