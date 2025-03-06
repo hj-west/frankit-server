@@ -23,15 +23,15 @@ public class ProductOption extends BaseEntity {
     /**
      * TYPE : 옵션 타입
      */
-    @Column(name = "TYPE", nullable = false, length = 30)
+    @Column(nullable = false, columnDefinition = "VARCHAR(10) CHECK (type IN ('INPUT', 'SELECT'))")
     @Enumerated(EnumType.STRING)
     private OptionType type;
 
     /**
      * VALUE : 옵션 값 목록
      */
-    @Column(name = "VALUE", length = 1000)
-    private String value;
+    @Column(name = "OPTION_VALUE", length = 1000)
+    private String optionValue;
 
     /**
      * OPTION_PRICE : 옵션 추가 금액

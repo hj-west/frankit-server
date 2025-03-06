@@ -45,7 +45,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
 
         productOptionRepository.save(ProductOption.builder()
                 .type(optionType)
-                .value(value)
+                .optionValue(value)
                 .optionPrice(optionPrice)
                 .product(product)
                 .build());
@@ -58,7 +58,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
                 .orElseThrow(() -> new ProductOptionNotFoundException("Product Option not found: " + productOptionId));
 
         Optional.ofNullable(optionType).ifPresent(productOption::setType);
-        Optional.ofNullable(value).ifPresent(productOption::setValue);
+        Optional.ofNullable(value).ifPresent(productOption::setOptionValue);
         Optional.ofNullable(optionPrice).ifPresent(productOption::setOptionPrice);
     }
 
