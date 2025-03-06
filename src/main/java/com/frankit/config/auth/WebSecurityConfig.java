@@ -32,7 +32,6 @@ public class WebSecurityConfig {
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin) // H2 콘솔사용
                 )
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // JWT 필터 추가
 
         return httpSecurity.build();
